@@ -33,3 +33,11 @@ export class AppComponent {
     this.result = false;
   }
 }
+
+export class Album {
+  nom : string = "";
+}
+
+export class Chanson {
+  titre : string = "";
+}
