@@ -5,23 +5,32 @@
   </header>
   <div class="row">
     <div class="col-3">
-      <form (ngSubmit)="searchArtist()" *ngIf="!result">
+      <form (ngSubmit)="searchAlbums()" *ngIf="!result && !chansons">
         <input type="text" name="artistName" [(ngModel)]="artist" class="form-control" placeholder="Nom d'un artiste">
         <input type="submit" value="Rechercher l'artiste" class="btn btn-light">
       </form>
       <form (ngSubmit)="newSearch()" *ngIf="result">
         <input type="submit" value="Nouvelle recherche">
       </form>
+      <form (ngSubmit)="backward()" *ngIf="chansons">
+        <input type="submit" value="Retour à la liste d'album">
+      </form>
     </div>
     <div class="col artists">
-        <h2>Résultats</h2>
-        <div *ngIf="result">
-		  <!-- L'affichage des artistes similaires sera ici -->
-      <h3>Artistes similaires à {{artist}}</h3>
-      <ul>
-        <li *ngFor="let a of similarArtists">{{a}}</li>
-      </ul>
-		</div>
-    </div>
+      <h2>Résultats</h2>
+      <div *ngIf="result">
+        <h3>Albums de {{artist}}</h3>
+        <ul>
+          <li *ngFor="let a of Albums"><a (click)="searchChansons(a.nom)"><img src="{{a.image}}" height="120px" class="imgAlbum">{{a.nom}}</a></li>
+        </ul>
+		  </div>
+      <div class="col chansons" *ngIf="chansons">
+        <div *ngIf="chansons">
+          <h3>Chansons de {{albumSelect}}</h3>
+          <ul>
+            <li *ngFor="let c of Chansons">{{c.titre}}</li>
+          </ul>
+        </div>
+      </div>
   </div>
 </div>
